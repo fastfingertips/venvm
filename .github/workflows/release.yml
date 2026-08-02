@@ -22,7 +22,7 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Build distributions
         run: python -m build
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: python-package-distributions
           path: dist/
