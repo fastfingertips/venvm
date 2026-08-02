@@ -1,5 +1,6 @@
 """Tests for venvm core operations."""
 
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -7,6 +8,8 @@ from unittest.mock import patch
 
 from venvm.core import (
     DependencySource,
+    VirtualEnvironment,
+    create_environment,
     discover_dependency_sources,
     discover_environments,
     discover_scripts,
@@ -14,6 +17,7 @@ from venvm.core import (
     interpreter_path,
     resolve_environment,
     run_module,
+    run_script,
 )
 
 
@@ -100,6 +104,50 @@ class CoreTests(unittest.TestCase):
                 [source.path.name for source in sources],
                 ["requirements.txt", "requirements-dev.txt", "pyproject.toml"],
             )
+
+    @patch("venvm.core.subprocess.run")
+    def test_create_environment_uses_current_python(self, run) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            environment_path = root / ".venv"
+            python = interpreter_path(environment_path)
+            python.parent.mkdir(parents=True)
+            python.touch()
+
+            environment = create_environment(root)
+
+        self.assertEqual(environment, VirtualEnvironment(environment_path, python))
+        run.assert_called_once_with(
+            [sys.executable, "-m", "venv", str(environment_path)],
+            cwd=root,
+            check=True,
+        )
+
+    @patch("venvm.core.subprocess.run")
+    def test_create_environment_rejects_missing_interpreter(self, run) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaises(RuntimeError):
+                create_environment(Path(directory))
+
+        run.assert_called_once()
+
+    @patch("venvm.core.subprocess.run")
+    def test_run_script_preserves_arguments_and_exit_code(self, run) -> None:
+        run.return_value.returncode = 4
+
+        result = run_script(
+            Path("python"),
+            Path("app.py"),
+            ["--port", "8000"],
+            Path("workspace"),
+        )
+
+        self.assertEqual(result, 4)
+        run.assert_called_once_with(
+            ["python", "app.py", "--port", "8000"],
+            cwd=Path("workspace"),
+            check=False,
+        )
 
     @patch("venvm.core.subprocess.run")
     def test_run_module_uses_python_dash_m(self, run) -> None:
