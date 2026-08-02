@@ -9,6 +9,7 @@
 ## Kalite Güvencesi
 
 - [x] Cross-platform ortam testlerinde çözümlenen geçici yolları normalize et.
+- [x] Küçük harfli Conventional Commit başlıklarında 45 karakter sınırını uygula.
 
 ## Ayar Dosyasını Bulma
 

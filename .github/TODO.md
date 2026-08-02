@@ -9,6 +9,7 @@
 ## Quality Assurance
 
 - [x] Normalize resolved temporary paths in cross-platform environment tests.
+- [x] Enforce lowercase Conventional Commit subjects with a 45-character limit.
 
 ## Configuration Discovery
 
