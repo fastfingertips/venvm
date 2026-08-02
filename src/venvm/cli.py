@@ -6,10 +6,11 @@ import argparse
 import subprocess
 import sys
 from pathlib import Path
-from typing import Callable, Sequence, TypeVar
+from typing import Sequence
 
 from venvm import __version__
 from venvm.config import ConfigError, ProjectConfig, load_project_config
+from venvm.console import InputFunction, ask_yes_no, choose
 from venvm.core import (
     VirtualEnvironment,
     create_environment,
@@ -21,9 +22,6 @@ from venvm.core import (
     run_module,
     run_script,
 )
-
-T = TypeVar("T")
-InputFunction = Callable[[str], str]
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -80,48 +78,6 @@ def build_parser() -> argparse.ArgumentParser:
         version=f"%(prog)s {__version__}",
     )
     return parser
-
-
-def ask_yes_no(prompt: str, input_fn: InputFunction = input) -> bool:
-    """Ask a yes/no question until a valid response is received."""
-
-    while True:
-        try:
-            answer = input_fn(f"{prompt} [Y/n]: ").strip().casefold()
-        except (EOFError, KeyboardInterrupt):
-            print("\nOperation cancelled.", file=sys.stderr)
-            return False
-        if answer in {"", "y", "yes"}:
-            return True
-        if answer in {"n", "no"}:
-            return False
-        print("Please enter 'y' or 'n'.", file=sys.stderr)
-
-
-def choose(
-    prompt: str,
-    options: Sequence[tuple[str, T]],
-    input_fn: InputFunction = input,
-) -> T | None:
-    """Display numbered options and return the selected value."""
-
-    print(prompt)
-    for index, (label, _) in enumerate(options, start=1):
-        print(f"  {index}. {label}")
-
-    while True:
-        try:
-            answer = input_fn("Selection: ").strip()
-        except (EOFError, KeyboardInterrupt):
-            print("\nOperation cancelled.", file=sys.stderr)
-            return None
-        try:
-            selected = int(answer)
-        except ValueError:
-            selected = 0
-        if 1 <= selected <= len(options):
-            return options[selected - 1][1]
-        print(f"Please enter a number from 1 to {len(options)}.", file=sys.stderr)
 
 
 def install_discovered_dependencies(

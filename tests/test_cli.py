@@ -7,9 +7,7 @@ from pathlib import Path
 from unittest.mock import ANY, patch
 
 from venvm.cli import (
-    ask_yes_no,
     build_parser,
-    choose,
     install_discovered_dependencies,
     main,
     resolve_script,
@@ -27,17 +25,6 @@ def answers(*values: str):
 
 class CliTests(unittest.TestCase):
     """Verify interactive selection and script validation."""
-
-    def test_ask_yes_no_retries_invalid_input(self) -> None:
-        self.assertTrue(ask_yes_no("Continue?", answers("invalid", "y")))
-
-    def test_choose_retries_out_of_range_input(self) -> None:
-        result = choose(
-            "Pick",
-            [("first", "a"), ("second", "b")],
-            answers("3", "2"),
-        )
-        self.assertEqual(result, "b")
 
     def test_resolve_script_rejects_missing_file(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
