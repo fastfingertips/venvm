@@ -13,8 +13,9 @@
 
 ## Configuration Discovery
 
-- [ ] Search parent directories for the nearest `.venvm.json` file.
-- [ ] Stop discovery at the filesystem root or an explicit project boundary.
+- [x] Search parent directories for the nearest `.venvm.json` file.
+- [x] Stop discovery at the filesystem root.
+- [ ] Support an explicit project boundary for configuration discovery.
 - [ ] Show the detected project root in diagnostic output.
 
 ## Configuration Layers

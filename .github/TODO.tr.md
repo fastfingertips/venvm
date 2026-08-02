@@ -13,8 +13,9 @@
 
 ## Ayar Dosyasını Bulma
 
-- [ ] En yakın `.venvm.json` dosyasını bulmak için üst dizinleri tara.
-- [ ] Dosya sistemi kökünde veya açıkça belirtilen proje sınırında taramayı durdur.
+- [x] En yakın `.venvm.json` dosyasını bulmak için üst dizinleri tara.
+- [x] Taramayı dosya sistemi kökünde durdur.
+- [ ] Ayar dosyası araması için açıkça belirtilen proje sınırını destekle.
 - [ ] Tanılama çıktısında algılanan proje kökünü göster.
 
 ## Ayar Katmanları

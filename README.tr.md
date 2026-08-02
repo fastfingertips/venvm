@@ -90,7 +90,9 @@ Modül çalıştırmak için:
 ```
 
 `script` ve `module` aynı anda kullanılamaz. Komut satırında verilen değerler
-ayar dosyasındaki varsayılanların önüne geçer.
+ayar dosyasındaki varsayılanların önüne geçer. Bir alt dizinden çalıştırıldığında
+venvm, en yakın `.venvm.json` dosyasını üst dizinlerde arar ve dosyanın bulunduğu
+dizini proje kökü olarak kullanır.
 
 ## Geliştirme
 

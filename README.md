@@ -90,7 +90,9 @@ For a module:
 ```
 
 `script` and `module` cannot be used together. Command-line values override the
-configuration file.
+configuration file. When run from a subdirectory, venvm searches parent
+directories for the nearest `.venvm.json` and uses its directory as the project
+root.
 
 ## Development
 

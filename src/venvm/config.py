@@ -23,6 +23,15 @@ class ProjectConfig:
     module: str | None = None
 
 
+@dataclass(frozen=True)
+class ProjectContext:
+    """Configuration values and paths resolved for a project."""
+
+    root: Path
+    config_path: Path | None
+    config: ProjectConfig
+
+
 def _optional_string(data: dict[str, Any], key: str) -> str | None:
     """Read an optional non-empty string value."""
 
@@ -62,3 +71,26 @@ def load_project_config(root: Path) -> ProjectConfig:
         raise ConfigError("'script' and 'module' cannot be used together")
     return config
 
+
+def load_project_context(start: Path) -> ProjectContext:
+    """Find the nearest project configuration at or above *start*."""
+
+    try:
+        root = start.resolve()
+    except OSError as error:
+        raise ConfigError(f"cannot resolve project path: {error}") from error
+
+    for directory in (root, *root.parents):
+        config_path = directory / CONFIG_FILENAME
+        try:
+            exists = config_path.exists()
+        except OSError as error:
+            raise ConfigError(f"cannot inspect {config_path}: {error}") from error
+        if exists:
+            return ProjectContext(
+                root=directory,
+                config_path=config_path,
+                config=load_project_config(directory),
+            )
+
+    return ProjectContext(root=root, config_path=None, config=ProjectConfig())

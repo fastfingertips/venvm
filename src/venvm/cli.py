@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Sequence
 
 from venvm import __version__
-from venvm.config import ConfigError, ProjectConfig, load_project_config
+from venvm.config import ConfigError, ProjectContext, load_project_context
 from venvm.core import run_module, run_script
 from venvm.workflow import (
     install_discovered_dependencies,
@@ -74,11 +74,11 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def _load_config(root: Path) -> ProjectConfig | None:
+def _load_config(root: Path) -> ProjectContext | None:
     """Load configuration and report user-facing errors."""
 
     try:
-        return load_project_config(root)
+        return load_project_context(root)
     except ConfigError as error:
         print(f"Error: Invalid .venvm.json: {error}", file=sys.stderr)
         return None
@@ -100,12 +100,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"Error: Could not read the working directory: {error}", file=sys.stderr)
         return 1
 
+    context = _load_config(root)
+    if context is None:
+        return 1
+    root = context.root
+    config = context.config
+
     if arguments.list_environments:
         return list_environments(root)
-
-    config = _load_config(root)
-    if config is None:
-        return 1
     preferred_environment = arguments.env or config.environment
     python = select_python(
         root,
