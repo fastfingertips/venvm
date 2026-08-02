@@ -1,6 +1,6 @@
 # venvm
 
-[Turkish](README.tr.md)
+**English** | [Türkçe](README.tr.md)
 
 `venvm` selects a Python virtual environment in the current directory and runs
 a Python script or module with that environment's interpreter.

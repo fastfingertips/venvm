@@ -1,6 +1,14 @@
 # Roadmap
 
-[Turkish](TODO.tr.md)
+**English** | [Türkçe](TODO.tr.md)
+
+## Documentation
+
+- [x] Show English and Turkish options together and mark the active document language.
+
+## Quality Assurance
+
+- [x] Normalize resolved temporary paths in cross-platform environment tests.
 
 ## Configuration Discovery
 

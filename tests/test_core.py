@@ -77,7 +77,7 @@ class CoreTests(unittest.TestCase):
             environment = resolve_environment(root, ".venv")
 
             self.assertIsNotNone(environment)
-            self.assertEqual(environment.python, python)
+            self.assertEqual(environment.python, python.resolve())
 
     def test_discover_dependency_sources_finds_supported_files(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

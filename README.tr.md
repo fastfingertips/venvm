@@ -1,6 +1,6 @@
 # venvm
 
-[English](README.md)
+[English](README.md) | **Türkçe**
 
 `venvm`, bulunduğunuz dizindeki Python sanal ortamını seçip bir Python scriptini
 veya modülünü o ortamın yorumlayıcısıyla çalıştıran komut satırı aracıdır.

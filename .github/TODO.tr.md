@@ -1,6 +1,14 @@
 # Yol Haritası
 
-[English](TODO.md)
+[English](TODO.md) | **Türkçe**
+
+## Dokümantasyon
+
+- [x] İngilizce ve Türkçe seçeneklerini birlikte göster ve etkin belge dilini belirt.
+
+## Kalite Güvencesi
+
+- [x] Cross-platform ortam testlerinde çözümlenen geçici yolları normalize et.
 
 ## Ayar Dosyasını Bulma
 
