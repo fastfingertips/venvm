@@ -11,6 +11,11 @@
 - [x] Normalize resolved temporary paths in cross-platform environment tests.
 - [x] Enforce lowercase Conventional Commit subjects with a 45-character limit.
 
+## Interactive Selection
+
+- [x] Support arrow-key navigation in interactive terminals.
+- [x] Preserve numbered selection and non-interactive fallback behavior.
+
 ## Configuration Discovery
 
 - [x] Search parent directories for the nearest `.venvm.json` file.

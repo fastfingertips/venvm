@@ -26,6 +26,10 @@ Ortamı ve scripti interaktif olarak seçme:
 venvm
 ```
 
+İnteraktif terminalde ok tuşları ve Enter kullanılabilir veya seçenek numarası
+yazılıp Enter'a basılabilir. İnteraktif olmayan terminallerde numaralı istem
+kullanılmaya devam eder.
+
 Bir scripti argümanlarıyla çalıştırma:
 
 ```console

@@ -11,6 +11,11 @@
 - [x] Cross-platform ortam testlerinde çözümlenen geçici yolları normalize et.
 - [x] Küçük harfli Conventional Commit başlıklarında 45 karakter sınırını uygula.
 
+## İnteraktif Seçim
+
+- [x] İnteraktif terminallerde ok tuşlarıyla gezinmeyi destekle.
+- [x] Numaralı seçimi ve interaktif olmayan terminal fallback davranışını koru.
+
 ## Ayar Dosyasını Bulma
 
 - [x] En yakın `.venvm.json` dosyasını bulmak için üst dizinleri tara.

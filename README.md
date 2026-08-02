@@ -26,6 +26,10 @@ Select an environment and script interactively:
 venvm
 ```
 
+In an interactive terminal, use the arrow keys and Enter or type an option
+number and press Enter. Numbered prompts remain available in non-interactive
+terminals.
+
 Run a script with arguments:
 
 ```console
