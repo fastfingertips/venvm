@@ -35,6 +35,26 @@ def interpreter_path(environment: Path, platform: str | None = None) -> Path:
     return environment / "bin" / "python"
 
 
+def _inspect_environment(
+    path: Path,
+) -> tuple[bool, VirtualEnvironment | None]:
+    """Return whether *path* is a venv candidate and its valid environment."""
+
+    try:
+        if not path.is_dir() or not (path / "pyvenv.cfg").is_file():
+            return False, None
+    except OSError:
+        return False, None
+
+    python = interpreter_path(path)
+    try:
+        if not python.is_file():
+            return True, None
+    except OSError:
+        return True, None
+    return True, VirtualEnvironment(path=path, python=python)
+
+
 def discover_environments(root: Path) -> tuple[list[VirtualEnvironment], list[Path]]:
     """Find valid and broken virtual environments directly below *root*."""
 
@@ -47,21 +67,13 @@ def discover_environments(root: Path) -> tuple[list[VirtualEnvironment], list[Pa
         return valid, broken
 
     for child in children:
-        try:
-            is_environment = child.is_dir() and (child / "pyvenv.cfg").is_file()
-        except OSError:
+        is_candidate, environment = _inspect_environment(child)
+        if not is_candidate:
             continue
-        if not is_environment:
-            continue
-
-        python = interpreter_path(child)
-        try:
-            if python.is_file():
-                valid.append(VirtualEnvironment(path=child, python=python))
-            else:
-                broken.append(child)
-        except OSError:
+        if environment is None:
             broken.append(child)
+        else:
+            valid.append(environment)
 
     return valid, broken
 
@@ -90,14 +102,10 @@ def resolve_environment(root: Path, value: str) -> VirtualEnvironment | None:
         path = root / path
     try:
         path = path.resolve()
-        if not path.is_dir() or not (path / "pyvenv.cfg").is_file():
-            return None
-        python = interpreter_path(path)
-        if not python.is_file():
-            return None
     except OSError:
         return None
-    return VirtualEnvironment(path=path, python=python)
+    _, environment = _inspect_environment(path)
+    return environment
 
 
 def discover_dependency_sources(root: Path) -> list[DependencySource]:
