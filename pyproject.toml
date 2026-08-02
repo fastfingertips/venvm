@@ -34,6 +34,7 @@ dependencies = []
 venvm = "venvm.cli:main"
 
 [project.urls]
+Homepage = "https://pypi.org/project/venvm/"
 Repository = "https://github.com/fastfingertips/venvm"
 Issues = "https://github.com/fastfingertips/venvm/issues"
 

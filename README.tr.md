@@ -1,16 +1,21 @@
-# venvm
-
-[English](README.md) | **Türkçe**
-
-`venvm`, bulunduğunuz dizindeki Python sanal ortamını seçip bir Python scriptini
-veya modülünü o ortamın yorumlayıcısıyla çalıştıran komut satırı aracıdır.
+<div align="center">
+  <h1>venvm</h1>
+  <p>Python sanal ortamını seçin; scriptleri veya modülleri bu ortamla çalıştırın.</p>
+  <p>
+    <a href="https://pypi.org/project/venvm/"><img alt="PyPI sürümü" src="https://img.shields.io/pypi/v/venvm.svg"></a>
+    <a href="https://pypi.org/project/venvm/"><img alt="Python sürümleri" src="https://img.shields.io/pypi/pyversions/venvm.svg"></a>
+    <a href="https://github.com/fastfingertips/venvm/actions/workflows/tests.yml"><img alt="Testler" src="https://github.com/fastfingertips/venvm/actions/workflows/tests.yml/badge.svg"></a>
+    <a href="https://github.com/fastfingertips/venvm/blob/main/LICENSE"><img alt="Lisans" src="https://img.shields.io/pypi/l/venvm.svg"></a>
+  </p>
+  <p><a href="https://github.com/fastfingertips/venvm/blob/main/README.md">English</a> | <strong>Türkçe</strong></p>
+</div>
 
 ## Kurulum
 
-Geliştirme sürümünü depodan kurmak için:
+venvm'i PyPI üzerinden kurmak için:
 
 ```console
-python -m pip install -e .
+python -m pip install venvm
 ```
 
 ## Kullanım
@@ -89,6 +94,12 @@ ayar dosyasındaki varsayılanların önüne geçer.
 
 ## Geliştirme
 
+Depoyu düzenlenebilir modda kurmak için:
+
+```console
+python -m pip install -e .
+```
+
 Standart kütüphane testlerini çalıştırma:
 
 ```console
@@ -98,4 +109,5 @@ python -m unittest discover -s tests
 ## Yol Haritası
 
 Planlanan ayar ve proje yönetimi çalışmaları
-[`.github/TODO.tr.md`](.github/TODO.tr.md) dosyasında takip edilmektedir.
+[`.github/TODO.tr.md`](https://github.com/fastfingertips/venvm/blob/main/.github/TODO.tr.md)
+dosyasında takip edilmektedir.

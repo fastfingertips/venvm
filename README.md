@@ -1,16 +1,21 @@
-# venvm
-
-**English** | [Türkçe](README.tr.md)
-
-`venvm` selects a Python virtual environment in the current directory and runs
-a Python script or module with that environment's interpreter.
+<div align="center">
+  <h1>venvm</h1>
+  <p>Select a Python virtual environment and run scripts or modules with it.</p>
+  <p>
+    <a href="https://pypi.org/project/venvm/"><img alt="PyPI version" src="https://img.shields.io/pypi/v/venvm.svg"></a>
+    <a href="https://pypi.org/project/venvm/"><img alt="Python versions" src="https://img.shields.io/pypi/pyversions/venvm.svg"></a>
+    <a href="https://github.com/fastfingertips/venvm/actions/workflows/tests.yml"><img alt="Tests" src="https://github.com/fastfingertips/venvm/actions/workflows/tests.yml/badge.svg"></a>
+    <a href="https://github.com/fastfingertips/venvm/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/pypi/l/venvm.svg"></a>
+  </p>
+  <p><strong>English</strong> | <a href="https://github.com/fastfingertips/venvm/blob/main/README.tr.md">Türkçe</a></p>
+</div>
 
 ## Installation
 
-Install the development version from the repository:
+Install venvm from PyPI:
 
 ```console
-python -m pip install -e .
+python -m pip install venvm
 ```
 
 ## Usage
@@ -89,6 +94,12 @@ configuration file.
 
 ## Development
 
+Install the repository in editable mode:
+
+```console
+python -m pip install -e .
+```
+
 Run the standard-library test suite:
 
 ```console
@@ -98,4 +109,4 @@ python -m unittest discover -s tests
 ## Roadmap
 
 Planned configuration and project management work is tracked in
-[`.github/TODO.md`](.github/TODO.md).
+[`.github/TODO.md`](https://github.com/fastfingertips/venvm/blob/main/.github/TODO.md).
